@@ -7,256 +7,277 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <header class="topbar">
-      <a class="brand" href="#home" aria-label="PutraInsight AI 2.0 home">
-        <span class="brand-mark">PI</span>
-        <span>PutraInsight AI 2.0</span>
-      </a>
-      <nav class="nav" aria-label="Primary navigation">
-        <a href="#dashboard">Dashboard</a>
-        <a href="#profile">Profile</a>
-        <a href="#engine">AI Engine</a>
-        <a href="#knowledge">NotebookLM</a>
-        <a href="#impact">Impact</a>
-        <a href="#mobile">Mobile</a>
-      </nav>
-    </header>
-
-    <main>
-      <section id="home" class="hero section">
-        <div class="hero-copy">
-          <h1>PutraInsight AI 2.0</h1>
-          <p class="tagline">Helping Students Thrive Before They Struggle</p>
-          <p>Student Success Navigator for personalized guidance, mentorship, wellbeing support, and development pathways grounded in official UPM knowledge.</p>
-          <a class="primary-button" href="#dashboard">View Student Success Dashboard</a>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <a class="brand" href="#overview" aria-label="PutraInsight AI 2.0 overview">
+          <span class="brand-mark">PI</span>
+          <span>
+            <strong>PutraInsight AI 2.0</strong>
+            <small>Student Success Navigator</small>
+          </span>
+        </a>
+        <nav class="side-nav" id="sideNav">
+          <button class="nav-item active" data-screen="overview" type="button">Overview</button>
+          <button class="nav-item" data-screen="students" type="button">Students</button>
+          <button class="nav-item" data-screen="detail" type="button">Student Detail</button>
+          <button class="nav-item" data-screen="insight" type="button">AI Insight</button>
+          <button class="nav-item" data-screen="notebook" type="button">NotebookLM Hub</button>
+          <button class="nav-item" data-screen="impact" type="button">Jiwa Putra Impact</button>
+          <button class="nav-item" data-screen="mobile" type="button">Mobile Preview</button>
+        </nav>
+        <div class="sidebar-note">
+          <span>Grounded by official UPM sources</span>
+          <strong>2-minute demo flow</strong>
         </div>
-        <div class="hero-panel" aria-label="Student success preview">
-          <div class="score-ring" style="--score:74">
-            <span>74</span>
-            <small>Student Success Score</small>
+      </aside>
+
+      <main class="main-area">
+        <header class="app-header">
+          <div>
+            <p class="eyebrow">Competition prototype</p>
+            <h1 id="screenTitle">Overview Dashboard</h1>
           </div>
-          <div class="mini-flow">
-            <span>UPM Sources</span>
-            <span>NotebookLM</span>
-            <span>Gemini</span>
-            <span>Recommendation</span>
+          <div class="selected-pill">
+            <span>Selected student</span>
+            <strong id="selectedStudentPill">Student A001</strong>
           </div>
-        </div>
-      </section>
+        </header>
 
-      <section class="section split">
-        <div>
-          <h2>Problem Statement</h2>
-          <p>Student support often begins only after visible difficulty appears. PutraInsight shifts the approach toward proactive success by identifying growth opportunities early and connecting students with the right university support ecosystem.</p>
-        </div>
-        <div>
-          <h2>Solution Overview</h2>
-          <p>The platform analyzes anonymized academic and engagement indicators, produces a Student Success Score, and recommends mentors, support services, wellbeing resources, leadership opportunities, and a 30-day success plan.</p>
-        </div>
-      </section>
-
-      <section class="section workflow">
-        <h2>NotebookLM + Gemini Workflow</h2>
-        <div class="workflow-grid">
-          <div>Official UPM Sources</div>
-          <div>NotebookLM Grounding</div>
-          <div>Gemini Reasoning</div>
-          <div>Student Success Plan</div>
-        </div>
-      </section>
-
-      <section class="section impact-strip">
-        <h2>Expected Impact</h2>
-        <div class="impact-row">
-          <span>Earlier academic guidance</span>
-          <span>Higher mentor engagement</span>
-          <span>Better wellbeing awareness</span>
-          <span>More leadership participation</span>
-        </div>
-      </section>
-
-      <section id="dashboard" class="section dashboard-page">
-        <div class="section-heading">
-          <h2>Student Success Dashboard</h2>
-          <p>Aggregated, anonymized indicators for proactive student success support.</p>
-        </div>
-        <div class="metric-grid" id="metrics"></div>
-        <div class="chart-grid">
-          <article class="panel">
-            <h3>Success Distribution</h3>
-            <div class="bars" id="distribution"></div>
-          </article>
-          <article class="panel">
-            <h3>Support Utilization</h3>
-            <canvas id="supportChart" width="520" height="260"></canvas>
-          </article>
-          <article class="panel">
-            <h3>Mentorship Engagement</h3>
-            <div class="progress-list" id="mentorList"></div>
-          </article>
-          <article class="panel">
-            <h3>Leadership Participation</h3>
-            <div class="donut-row">
-              <div class="donut" style="--p:62"><span>62%</span></div>
-              <p>Students matched to leadership, volunteer, SULAM, career, or peer-learning opportunities.</p>
+        <section class="screen active" id="screen-overview" data-title="Overview Dashboard">
+          <div class="intro-panel">
+            <div>
+              <h2>Multi-student success command center</h2>
+              <p>Analyze anonymized student indicators, identify growth opportunities, and generate support pathways grounded in UPM resources.</p>
             </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="profile" class="section profile-page">
-        <div class="section-heading">
-          <h2>Student Success Profile</h2>
-          <p>Student A001</p>
-        </div>
-        <div class="profile-layout">
-          <article class="panel profile-card">
-            <div class="profile-top">
-              <div>
-                <h3>Student A001</h3>
-                <p>Faculty of Computer Science and Information Technology · Year 2</p>
+            <button class="primary-action" data-go="students" type="button">Review Students</button>
+          </div>
+          <div class="metric-grid" id="overviewMetrics"></div>
+          <div class="dashboard-grid">
+            <article class="panel">
+              <div class="panel-head">
+                <h3>Category Distribution</h3>
+                <span>20 students</span>
               </div>
-              <span class="status needs">Needs Support</span>
-            </div>
-            <div class="score-ring large" style="--score:48">
-              <span>48</span>
-              <small>Student Success Score</small>
-            </div>
-          </article>
-          <article class="panel">
-            <h3>Academic and Engagement Indicators</h3>
-            <div class="indicator-grid" id="studentIndicators"></div>
-          </article>
-          <article class="panel wide">
-            <h3>GPA Trend</h3>
-            <div class="trend">
-              <span style="height:58%">Previous GPA 2.52</span>
-              <span style="height:66%">Current GPA 2.88</span>
-              <span style="height:74%">Target GPA 3.15</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="engine" class="section engine-page">
-        <div class="section-heading">
-          <h2>AI Recommendation Engine</h2>
-          <p>Recommendations are grounded using official UPM NotebookLM sources.</p>
-        </div>
-        <div class="recommendation-grid">
-          <article class="panel">
-            <h3>Main Factors</h3>
-            <ul>
-              <li>Recent GPA improvement but still below personal target.</li>
-              <li>Attendance pattern suggests need for structured check-ins.</li>
-              <li>Low awareness of support services.</li>
-              <li>High stress and low confidence indicators.</li>
-            </ul>
-          </article>
-          <article class="panel">
-            <h3>Recommended Mentor</h3>
-            <p>Academic advisor plus trained peer mentor from the same faculty.</p>
-          </article>
-          <article class="panel">
-            <h3>Recommended Academic Support</h3>
-            <p>Advisor-led study plan, weekly study circle, and assessment milestone tracking.</p>
-          </article>
-          <article class="panel">
-            <h3>Recommended Wellbeing Support</h3>
-            <p>UPM Counselling Division service information and voluntary appointment pathway.</p>
-          </article>
-          <article class="panel">
-            <h3>Leadership Opportunity</h3>
-            <p>Low-pressure volunteer activity through student development channels.</p>
-          </article>
-          <article class="panel">
-            <h3>Development Program</h3>
-            <p>PUTRAFLEX or SULAM-inspired pathway based on interests and current workload.</p>
-          </article>
-        </div>
-        <article class="panel plan">
-          <h3>30-Day Success Plan</h3>
-          <div class="timeline">
-            <div><strong>Week 1</strong><span>Advisor meeting and personal success goal.</span></div>
-            <div><strong>Week 2</strong><span>Join study circle and review course milestones.</span></div>
-            <div><strong>Week 3</strong><span>Wellbeing check-in and confidence-building action.</span></div>
-            <div><strong>Week 4</strong><span>Mentor reflection and next-month plan.</span></div>
+              <div class="bar-list" id="categoryDistribution"></div>
+            </article>
+            <article class="panel">
+              <div class="panel-head">
+                <h3>Top Support Needs</h3>
+                <span>from recommendations</span>
+              </div>
+              <div class="need-list" id="supportNeeds"></div>
+            </article>
+            <article class="panel wide-panel">
+              <div class="panel-head">
+                <h3>Recent AI Recommendations</h3>
+                <span>click a student to inspect</span>
+              </div>
+              <div class="recommendation-feed" id="recentRecommendations"></div>
+            </article>
           </div>
-          <div class="source-confidence">
-            <span>Source: UPM Academic Support Handbook</span>
-            <strong>Confidence: 92%</strong>
+        </section>
+
+        <section class="screen" id="screen-students" data-title="Students">
+          <div class="screen-toolbar">
+            <div>
+              <h2>Students analyzed</h2>
+              <p>All records are synthetic and anonymized for the competition demo.</p>
+            </div>
+            <input id="studentSearch" type="search" placeholder="Search student, faculty, category">
           </div>
-        </article>
-      </section>
-
-      <section id="knowledge" class="section knowledge-page">
-        <div class="section-heading">
-          <h2>NotebookLM Knowledge Hub</h2>
-          <p>Official UPM knowledge turns recommendations into institutionally grounded guidance.</p>
-        </div>
-        <div class="category-grid">
-          <span>Academic Support</span>
-          <span>Welfare</span>
-          <span>Counselling</span>
-          <span>Leadership</span>
-          <span>Career</span>
-          <span>Mentor-Mentee</span>
-          <span>Jiwa Putra</span>
-        </div>
-        <div class="source-flow">
-          <div>Source</div>
-          <div>NotebookLM</div>
-          <div>Gemini</div>
-          <div>Recommendation</div>
-        </div>
-        <div class="knowledge-cards">
-          <article class="panel"><h3>Academic</h3><p>Grounds study planning in calendars, rules, and advising guidelines.</p></article>
-          <article class="panel"><h3>Wellbeing</h3><p>Routes support to counselling and holistic wellbeing services.</p></article>
-          <article class="panel"><h3>Development</h3><p>Connects students to leadership, SULAM, career, and community opportunities.</p></article>
-        </div>
-      </section>
-
-      <section id="impact" class="section jiwa-page">
-        <div class="section-heading">
-          <h2>Jiwa Putra Impact Dashboard</h2>
-          <p>Connecting student success with Berilmu Berbakti, community care, integrity, and future-ready graduates.</p>
-        </div>
-        <div class="impact-dashboard">
-          <article class="panel impact-card"><span>Student Success Rate</span><strong>82%</strong></article>
-          <article class="panel impact-card"><span>Mentor Engagement</span><strong>71%</strong></article>
-          <article class="panel impact-card"><span>Leadership Participation</span><strong>62%</strong></article>
-          <article class="panel impact-card"><span>Support Program Utilization</span><strong>68%</strong></article>
-          <article class="panel impact-card"><span>Community Engagement</span><strong>57%</strong></article>
-        </div>
-        <article class="panel journey">
-          <h3>Success Journey Demo</h3>
-          <div class="journey-grid">
-            <div><span>Before Support</span><strong>48</strong><small>Needs Support</small></div>
-            <div><span>Intervention</span><strong>Mentor + Support Programs</strong><small>Advisor check-in, study circle, wellbeing guidance</small></div>
-            <div><span>After Support</span><strong>74</strong><small>Stable</small></div>
+          <div class="student-table-wrap">
+            <table class="student-table">
+              <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>Faculty</th>
+                  <th>Year</th>
+                  <th>Score</th>
+                  <th>Category</th>
+                  <th>Recommended Action</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="studentRows"></tbody>
+            </table>
           </div>
-        </article>
-      </section>
+        </section>
 
-      <section id="mobile" class="section mobile-page">
-        <div class="section-heading">
-          <h2>Mobile App Mockup</h2>
-          <p>Six student-facing screens for daily success guidance.</p>
-        </div>
-        <div class="phone-grid">
-          <div class="phone"><h3>Home</h3><p>Good morning, A001</p><strong>Today: meet your mentor</strong></div>
-          <div class="phone"><h3>Success Score</h3><div class="score-ring small" style="--score:74"><span>74</span></div><p>Stable and improving</p></div>
-          <div class="phone"><h3>My Success Pathway</h3><p>Study rhythm · wellbeing · mentor check-in</p></div>
-          <div class="phone"><h3>Mentor Recommendation</h3><p>Faculty peer mentor + academic advisor</p></div>
-          <div class="phone"><h3>Recommended Programs</h3><p>Study Circle · Counselling Info · Jiwa Putra Volunteer</p></div>
-          <div class="phone"><h3>Success Journey</h3><div class="months"><span>Month 1 48</span><span>Month 2 63</span><span>Month 3 74</span></div></div>
-        </div>
-      </section>
-    </main>
+        <section class="screen" id="screen-detail" data-title="Student Detail">
+          <div class="detail-grid">
+            <article class="panel profile-panel">
+              <div class="profile-head">
+                <div>
+                  <h2 id="detailId">Student A001</h2>
+                  <p id="detailFaculty">Faculty</p>
+                </div>
+                <span class="category-badge" id="detailCategory">Needs Support</span>
+              </div>
+              <div class="score-block">
+                <div class="score-ring" id="detailScoreRing" style="--score:48">
+                  <span id="detailScore">48</span>
+                  <small>Student Success Score</small>
+                </div>
+                <div class="score-copy">
+                  <strong id="detailYear">Year 2</strong>
+                  <p id="detailAction">Recommended action appears here.</p>
+                </div>
+              </div>
+            </article>
+            <article class="panel">
+              <div class="panel-head">
+                <h3>GPA Trend</h3>
+                <span id="gpaTrendLabel">Improving</span>
+              </div>
+              <div class="trend-bars" id="gpaTrend"></div>
+            </article>
+            <article class="panel wide-panel">
+              <div class="panel-head">
+                <h3>Academic and Engagement Indicators</h3>
+                <span>selected student</span>
+              </div>
+              <div class="indicator-grid" id="detailIndicators"></div>
+            </article>
+          </div>
+        </section>
 
-    <footer class="footer">
-      <p>PutraInsight AI 2.0 · Student Success and Support Recommendation Platform · Static demo for GitHub Pages</p>
-    </footer>
+        <section class="screen" id="screen-insight" data-title="AI Insight Engine">
+          <div class="ai-layout">
+            <article class="panel selected-summary">
+              <div class="panel-head">
+                <h3 id="insightStudent">Student A001</h3>
+                <span id="insightCategory">Needs Support</span>
+              </div>
+              <p>Recommendations are grounded using official UPM resources through NotebookLM.</p>
+              <div class="source-card">
+                <span>NotebookLM source used</span>
+                <strong id="sourceUsed">UPM Academic Advising System Guideline</strong>
+                <div class="confidence-line">
+                  <i id="confidenceBar"></i>
+                </div>
+                <small id="confidenceScore">Source confidence: 92%</small>
+              </div>
+            </article>
+            <article class="panel">
+              <h3>Key Support Factors</h3>
+              <ul class="clean-list" id="supportFactors"></ul>
+            </article>
+            <article class="panel">
+              <h3>Strengths</h3>
+              <ul class="clean-list" id="strengths"></ul>
+            </article>
+            <article class="panel">
+              <h3>Growth Opportunities</h3>
+              <ul class="clean-list" id="growthOpportunities"></ul>
+            </article>
+            <article class="panel wide-panel">
+              <div class="recommendation-grid" id="aiRecommendations"></div>
+            </article>
+            <article class="panel wide-panel journey-panel">
+              <div class="panel-head">
+                <h3>30-Day Success Journey</h3>
+                <span id="journeyGain">+26 points</span>
+              </div>
+              <div class="journey-visual">
+                <div class="journey-state before">
+                  <span>Before support</span>
+                  <strong id="beforeScore">48</strong>
+                  <small id="beforeCategory">Needs Support</small>
+                </div>
+                <div class="journey-plan" id="successPlan"></div>
+                <div class="journey-state after">
+                  <span>After 30-day plan</span>
+                  <strong id="afterScore">74</strong>
+                  <small id="afterCategory">Stable</small>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-notebook" data-title="NotebookLM Hub">
+          <div class="intro-panel">
+            <div>
+              <h2>How grounding works</h2>
+              <p>NotebookLM keeps the recommendation engine connected to UPM academic, welfare, counselling, leadership, career, and Jiwa Putra sources.</p>
+            </div>
+          </div>
+          <div class="grounding-flow">
+            <div>Student Indicators</div>
+            <div>Gemini Analysis</div>
+            <div>NotebookLM Official Sources</div>
+            <div>Personalized Recommendation</div>
+            <div>Student Success Pathway</div>
+          </div>
+          <div class="source-category-grid" id="sourceCards"></div>
+        </section>
+
+        <section class="screen" id="screen-impact" data-title="Jiwa Putra Impact">
+          <div class="impact-hero">
+            <div>
+              <h2>From insight to care, responsibility, and empowerment</h2>
+              <p>PutraInsight connects student success with mentorship, wellbeing, leadership, and community impact.</p>
+            </div>
+            <div class="impact-mark">Jiwa Putra</div>
+          </div>
+          <div class="impact-metrics" id="impactMetrics"></div>
+          <div class="value-grid">
+            <article class="panel"><h3>Care</h3><p>Earlier support recommendations before students feel alone.</p></article>
+            <article class="panel"><h3>Responsibility</h3><p>Human-in-the-loop guidance for advisors and support units.</p></article>
+            <article class="panel"><h3>Student Empowerment</h3><p>Clear next steps that students can understand and act on.</p></article>
+            <article class="panel"><h3>Mentorship</h3><p>Advisor and peer mentor actions connected to each pathway.</p></article>
+            <article class="panel"><h3>Wellbeing</h3><p>Support options presented positively and respectfully.</p></article>
+            <article class="panel"><h3>Community Impact</h3><p>Leadership and service pathways aligned with Berilmu Berbakti.</p></article>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-mobile" data-title="Mobile Preview">
+          <div class="screen-toolbar">
+            <div>
+              <h2>Student mobile companion</h2>
+              <p>A clean mobile view for success score, pathway, mentor, and recommended programmes.</p>
+            </div>
+          </div>
+          <div class="phone-grid">
+            <div class="phone">
+              <h3>Home</h3>
+              <p id="mobileHome">Welcome back, Student A001</p>
+              <strong id="mobileToday">Today: advisor check-in</strong>
+            </div>
+            <div class="phone">
+              <h3>Success Score</h3>
+              <div class="score-ring small" id="mobileScoreRing" style="--score:48"><span id="mobileScore">48</span></div>
+              <p id="mobileCategory">Needs Support</p>
+            </div>
+            <div class="phone">
+              <h3>My Success Pathway</h3>
+              <p>Month 1: stabilize study rhythm</p>
+              <p>Month 2: mentor reflection</p>
+              <p>Month 3: leadership opportunity</p>
+            </div>
+            <div class="phone">
+              <h3>Mentor Recommendation</h3>
+              <p>Academic advisor plus trained peer mentor from the same faculty.</p>
+            </div>
+            <div class="phone">
+              <h3>Recommended Programs</h3>
+              <p id="mobilePrograms">Study Circle, Wellbeing Info, Jiwa Putra Volunteer</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <button class="nav-item active" data-screen="overview" type="button">Overview</button>
+      <button class="nav-item" data-screen="students" type="button">Students</button>
+      <button class="nav-item" data-screen="detail" type="button">Detail</button>
+      <button class="nav-item" data-screen="insight" type="button">AI</button>
+      <button class="nav-item" data-screen="notebook" type="button">Hub</button>
+      <button class="nav-item" data-screen="impact" type="button">Impact</button>
+      <button class="nav-item" data-screen="mobile" type="button">Mobile</button>
+    </nav>
+
     <script src="script.js"></script>
   </body>
 </html>
