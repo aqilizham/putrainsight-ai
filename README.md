@@ -6,9 +6,9 @@ Live demo: https://aqilizham.github.io/putrainsight-ai/
 
 PutraInsight AI 2.0 is a Student Success and Support Recommendation Platform. It helps students thrive through personalized guidance, mentorship, wellbeing resources, welfare support, leadership opportunities, development programmes, and a 30-day success pathway.
 
-## V3 Executive Summary
+## Final Polish Executive Summary
 
-The V3 prototype upgrades the demo from a functional dashboard into a competition-ready product showcase. It combines:
+The final polished prototype prepares PutraInsight AI 2.0 for poster, video, and live competition presentation. It combines:
 
 - premium UPM-inspired branding;
 - a multi-student command center;
@@ -17,7 +17,7 @@ The V3 prototype upgrades the demo from a functional dashboard into a competitio
 - NotebookLM source grounding;
 - Jiwa Putra impact storytelling;
 - a mobile companion preview;
-- a screenshot-ready Showcase Board.
+- a screenshot-ready Showcase Board for poster and pitch video production.
 
 The prototype uses static HTML, CSS, JavaScript, and synthetic/anonymized data only.
 
@@ -49,7 +49,7 @@ The Student Success Score is a positive composite indicator for guidance and sup
 
 ## Demo Screens
 
-1. Launch landing screen
+1. Launch product introduction
 2. Overview command center
 3. Students table with search and category filters
 4. Student Detail
@@ -100,6 +100,17 @@ The full catalog is available at:
 Open the live demo at:
 
 https://aqilizham.github.io/putrainsight-ai/
+
+Recommended 2-minute flow:
+
+1. Launch
+2. Overview
+3. Students
+4. Student Detail
+5. AI Insight
+6. NotebookLM Hub
+7. Jiwa Putra Impact
+8. Showcase Board
 
 For local testing, serve the project root with any static HTTP server and open `/demo/`.
 

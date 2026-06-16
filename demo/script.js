@@ -197,6 +197,7 @@ function renderOverview() {
     .join("");
 
   byId("heroAverageScore").textContent = average(students, "student_success_score");
+  byId("showcaseAvgScore").textContent = average(students, "student_success_score");
 }
 
 function renderFilters() {
@@ -222,8 +223,10 @@ function renderStudents(filter = "") {
     return matchesCategory && matchesQuery;
   });
 
-  byId("studentRows").innerHTML = rows
-    .map((student) => `
+  byId("studentResultCount").textContent = `${rows.length} ${rows.length === 1 ? "student" : "students"} shown`;
+
+  byId("studentRows").innerHTML = rows.length
+    ? rows.map((student) => `
       <tr class="${student.student_id === state.selectedId ? "selected" : ""}">
         <td><strong>${student.student_id}</strong></td>
         <td>${student.faculty}</td>
@@ -234,7 +237,8 @@ function renderStudents(filter = "") {
         <td><button class="table-action" type="button" data-select="${student.student_id}" data-go="detail">View Details</button></td>
       </tr>
     `)
-    .join("");
+    .join("")
+    : `<tr><td class="empty-state" colspan="7"><strong>No matching students</strong><span>Try another search term or choose a different support pathway filter.</span></td></tr>`;
 
   const student = selectedStudent();
   byId("selectedScoreCompact").textContent = student.student_success_score;
@@ -248,6 +252,7 @@ function renderDetail() {
   byId("detailId").textContent = student.student_id;
   byId("detailFaculty").textContent = student.faculty;
   byId("detailCategory").textContent = student.category;
+  byId("detailCategory").className = `category-badge ${categoryClass(student.category)}`;
   byId("detailScore").textContent = student.student_success_score;
   byId("detailScoreRing").style.setProperty("--score", student.student_success_score);
   byId("detailYear").textContent = `Year ${student.year}`;
@@ -466,12 +471,21 @@ function renderImpact() {
 
 function renderMobile() {
   const student = selectedStudent();
+  const source = sourceFor(student);
+  const matchScore = mentorMatch(student);
   byId("mobileHome").textContent = `Welcome back, ${student.student_id}`;
   byId("mobileToday").textContent = student.advisor_meetings < 2 ? "Today: advisor check-in" : "Today: pathway reflection";
   byId("mobileScore").textContent = student.student_success_score;
   byId("mobileScoreRing").style.setProperty("--score", student.student_success_score);
   byId("mobileCategory").textContent = student.category;
   byId("mobilePrograms").textContent = student.recommended_action;
+  const mobileProgress = document.querySelectorAll(".phone .mini-progress i");
+  if (mobileProgress[0]) mobileProgress[0].style.width = `${student.student_success_score}%`;
+  if (mobileProgress[1]) mobileProgress[1].style.width = `${matchScore}%`;
+  const mentorScore = document.querySelector(".phone:nth-child(4) strong");
+  const sourceScore = document.querySelector(".phone:nth-child(6) strong");
+  if (mentorScore) mentorScore.textContent = `Match Score: ${matchScore}%`;
+  if (sourceScore) sourceScore.textContent = `Source confidence: ${source.confidence}%`;
 }
 
 function renderAll() {

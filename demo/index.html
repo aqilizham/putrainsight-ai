@@ -75,6 +75,27 @@
               <article><span>Mobile Preview</span><strong>Success pathway</strong></article>
             </div>
           </div>
+          <div class="launch-polish-grid">
+            <article class="launch-problem-card">
+              <span>Problem</span>
+              <strong>Support often arrives after challenges become visible.</strong>
+              <p>Many students receive support only after academic, wellbeing, or engagement signals become difficult to miss.</p>
+            </article>
+            <article class="launch-solution-card">
+              <span>Solution</span>
+              <strong>Earlier, advisor-guided success pathways.</strong>
+              <p>PutraInsight AI 2.0 helps UPM act earlier through AI-guided, NotebookLM-grounded support recommendations.</p>
+            </article>
+            <article class="launch-workflow-card">
+              <span>Workflow</span>
+              <div class="mini-workflow">
+                <b>Indicators</b>
+                <b>Gemini</b>
+                <b>NotebookLM</b>
+                <b>Advisor Review</b>
+              </div>
+            </article>
+          </div>
           <div class="value-card-grid">
             <article><span>01</span><strong>Personalized Guidance</strong><p>Student-specific success pathways from anonymized indicators.</p></article>
             <article><span>02</span><strong>Mentorship & Support</strong><p>Advisor and peer mentor actions remain human-guided.</p></article>
@@ -95,7 +116,10 @@
           <div class="dashboard-grid">
             <article class="panel simulation-panel wide-panel">
               <div class="panel-head">
-                <h3>Cohort Improvement Simulation</h3>
+                <div>
+                  <h3>Cohort Improvement Simulation</h3>
+                  <p>Screenshot-ready view of how advisor-guided support can move students into stable success pathways.</p>
+                </div>
                 <span>30-day AI-guided support</span>
               </div>
               <div class="simulation-grid">
@@ -113,6 +137,11 @@
                   <h4>After 30-day plan</h4>
                   <div class="bar-list" id="afterSimulation"></div>
                 </div>
+              </div>
+              <div class="simulation-proof-row">
+                <span><strong>+26</strong> average improvement</span>
+                <span><strong>7</strong> students moved to stable pathway</span>
+                <span><strong>100%</strong> source-grounded recommendations</span>
               </div>
             </article>
             <article class="panel">
@@ -159,7 +188,10 @@
               <h2>Multi-student cohort</h2>
               <p>The table is powered by `demo/data.json` and supports all 20 anonymized student profiles.</p>
             </div>
-            <input id="studentSearch" type="search" placeholder="Search student, faculty, category">
+            <div class="search-stack">
+              <input id="studentSearch" type="search" placeholder="Search student, faculty, category">
+              <span id="studentResultCount">20 students shown</span>
+            </div>
           </div>
           <div class="student-page-grid">
             <article class="panel filter-panel">
@@ -331,6 +363,7 @@
             <div>Student Success Pathway</div>
             <div>Advisor Review</div>
           </div>
+          <p class="workflow-note">NotebookLM helps keep recommendations UPM-specific, source-aware, and aligned with official student support pathways.</p>
           <div class="why-grid">
             <article class="panel">
               <h3>Why NotebookLM?</h3>
@@ -387,33 +420,78 @@
         <section class="screen" id="screen-showcase" data-title="Showcase Board">
           <div class="showcase-board">
             <article class="showcase-hero">
-              <span>PutraInsight AI 2.0</span>
+              <span>Competition product board</span>
+              <small>PutraInsight AI 2.0</small>
               <h2>Helping Students Thrive Before They Struggle</h2>
               <p>AI-powered student success navigator grounded by NotebookLM and powered by Gemini reasoning.</p>
+              <div class="showcase-flow-line">
+                <b>Student Success</b>
+                <b>NotebookLM Grounding</b>
+                <b>Gemini Reasoning</b>
+              </div>
             </article>
             <article class="showcase-card dashboard-preview">
               <h3>Dashboard Preview</h3>
-              <strong>20</strong>
-              <span>student profiles analyzed</span>
-              <div class="preview-bars"><i style="width:78%"></i><i style="width:58%"></i><i style="width:28%"></i></div>
+              <div class="showcase-stat-row">
+                <strong>20</strong>
+                <span>student profiles analyzed</span>
+              </div>
+              <div class="showcase-stat-row">
+                <strong id="showcaseAvgScore">70</strong>
+                <span>average success score</span>
+              </div>
+              <div class="mini-cohort-chart">
+                <i style="height:48%"><span>6</span></i>
+                <i style="height:56%"><span>7</span></i>
+                <i style="height:40%"><span>5</span></i>
+                <i style="height:16%"><span>2</span></i>
+                <em>Before</em>
+                <i style="height:80%"><span>10</span></i>
+                <i style="height:64%"><span>8</span></i>
+                <i style="height:16%"><span>2</span></i>
+                <i style="height:4%"><span>0</span></i>
+                <em>After</em>
+              </div>
             </article>
-            <article class="showcase-card">
+            <article class="showcase-card insight-preview-card">
               <h3>AI Insight Preview</h3>
-              <p>Factor contributions, mentor match, source confidence, and 30-day success plan.</p>
+              <p>Why this recommendation?</p>
+              <div class="showcase-factor"><span>Advisor engagement</span><i style="width:82%"></i><b>+8</b></div>
+              <div class="showcase-factor"><span>Support need</span><i style="width:72%"></i><b>-15</b></div>
+              <div class="showcase-mini-stats">
+                <span>Mentor match <strong>91%</strong></span>
+                <span>Source confidence <strong>92%</strong></span>
+              </div>
             </article>
-            <article class="showcase-card">
+            <article class="showcase-card notebook-preview-card">
               <h3>NotebookLM Workflow</h3>
+              <div class="compact-flow">
+                <span>Indicators</span>
+                <span>Gemini</span>
+                <span>NotebookLM</span>
+                <span>Recommendation</span>
+                <span>Advisor Review</span>
+              </div>
               <p>Student Indicators → Gemini Analysis → Official UPM Sources → Advisor Review</p>
             </article>
-            <article class="showcase-card">
+            <article class="showcase-card impact-preview-card">
               <h3>Jiwa Putra Impact</h3>
-              <strong>100%</strong>
-              <span>recommendations source-grounded</span>
+              <div><strong>100%</strong><span>source-grounded recommendations</span></div>
+              <div><strong>29</strong><span>advisor/mentor actions</span></div>
+              <div><strong>7</strong><span>students moved to stable pathway</span></div>
             </article>
             <article class="showcase-phone">
               <div class="phone-top">Mobile Preview</div>
-              <strong>Student Success Score</strong>
-              <span>74 Stable pathway</span>
+              <div class="showcase-phone-card">
+                <span>Student Success Score</span>
+                <strong>74</strong>
+                <i></i>
+              </div>
+              <div class="showcase-phone-card">
+                <span>My Success Pathway</span>
+                <b>Advisor check-in ready</b>
+              </div>
+              <small>NotebookLM support attached</small>
             </article>
           </div>
         </section>

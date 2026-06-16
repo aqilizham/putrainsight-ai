@@ -1,13 +1,13 @@
-# PutraInsight AI 2.0 V3 Static Demo
+# PutraInsight AI 2.0 Final Polished Static Demo
 
-This folder contains the GitHub Pages-ready static demo for the competition prototype.
+This folder contains the GitHub Pages-ready final polished competition prototype.
 
 Live demo: https://aqilizham.github.io/putrainsight-ai/
 
 ## Files
 
-- `index.html` - V3 app-style prototype with landing, dashboard, student detail, AI insight, NotebookLM hub, impact dashboard, mobile preview, and showcase board.
-- `styles.css` - premium UPM-inspired visual system using maroon, white, gold, and subtle green.
+- `index.html` - final app-style prototype with launch page, command center, student detail, AI insight, NotebookLM hub, Jiwa Putra impact page, mobile preview, and showcase board.
+- `styles.css` - premium UPM-inspired visual system using maroon, white, gold, and subtle green, with responsive poster/video screenshot targets.
 - `script.js` - local state, student selection, filters, AI factor explanations, source grounding, and impact simulation.
 - `data.json` - 20 synthetic/anonymized student records.
 - `assets/concept-putrainsight.png` - generated concept board used as visual direction.
@@ -22,7 +22,11 @@ Live demo: https://aqilizham.github.io/putrainsight-ai/
 6. Open AI Insight to explain factor contributions, mentor matching, and the 30-day success plan.
 7. Open NotebookLM Hub to show how official UPM sources ground recommendations.
 8. Open Jiwa Putra Impact to connect the system to care, responsibility, empowerment, mentorship, wellbeing, leadership, and community impact.
-9. Open Mobile Preview and Showcase Board for screenshot-ready visuals.
+9. Open Mobile Preview and Showcase Board for screenshot-ready poster and video visuals.
+
+## Positioning
+
+PutraInsight AI 2.0 is framed as a student success navigator, support recommendation platform, NotebookLM-grounded guidance system, and human-in-the-loop advisor support prototype focused on care, development, and earlier support pathways.
 
 ## Data Privacy
 
