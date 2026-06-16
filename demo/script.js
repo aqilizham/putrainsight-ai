@@ -1,7 +1,8 @@
 const state = {
   students: [],
   selectedId: "Student A001",
-  activeScreen: "overview"
+  activeScreen: "landing",
+  categoryFilter: "All"
 };
 
 const categoryColors = {
@@ -11,41 +12,76 @@ const categoryColors = {
   "Immediate Attention": "#7a1026"
 };
 
+const simulationBefore = {
+  "Thriving": 6,
+  "Stable": 7,
+  "Needs Support": 5,
+  "Immediate Attention": 2
+};
+
+const simulationAfter = {
+  "Thriving": 10,
+  "Stable": 8,
+  "Needs Support": 2,
+  "Immediate Attention": 0
+};
+
 const sourceCards = [
   {
     title: "Academic Support",
     source: "UPM Academic Rules and Academic Calendar",
-    use: "Grounds study planning, course milestones, assessment timing, and academic pathway advice."
+    unit: "Division of Admission and Division of Academic Governance",
+    use: "Grounds study planning, course milestones, assessment timing, and academic pathway advice.",
+    type: "Academic planning and study support",
+    priority: "High"
   },
   {
     title: "Academic Advising / Mentor-Mentee",
     source: "Academic Advising System Guideline",
-    use: "Supports advisor check-ins, mentor routing, and progress reflection recommendations."
+    unit: "UPM Registrar Office",
+    use: "Supports advisor check-ins, mentor routing, and progress reflection recommendations.",
+    type: "Advisor-guided support",
+    priority: "High"
   },
   {
     title: "Welfare / Financial Aid",
     source: "Student Welfare Services and Financial Assistance",
-    use: "Connects students to official support services when financial or welfare needs appear."
+    unit: "Student Affairs Division",
+    use: "Connects students to official support services when financial or welfare needs appear.",
+    type: "Welfare pathway",
+    priority: "High"
   },
   {
     title: "Counselling / Wellbeing",
     source: "UPM Counselling Division Services",
-    use: "Grounds wellbeing nudges, voluntary counselling information, and confidence support."
+    unit: "UPM Counselling Division",
+    use: "Grounds wellbeing nudges, voluntary counselling information, and confidence support.",
+    type: "Wellbeing support information",
+    priority: "High"
   },
   {
     title: "Leadership / Student Development",
     source: "Student Affairs Division and student activity resources",
-    use: "Matches students to leadership, volunteer, and student development opportunities."
+    unit: "Student Affairs Division",
+    use: "Matches students to leadership, volunteer, and student development opportunities.",
+    type: "Leadership opportunity",
+    priority: "Medium"
   },
   {
     title: "Career / Employability",
     source: "PUTRAFLEX, SULAM, work-based learning resources",
-    use: "Recommends future-ready development pathways, career preparation, and service learning."
+    unit: "CADe-Lead",
+    use: "Recommends future-ready development pathways, career preparation, and service learning.",
+    type: "Career and development pathway",
+    priority: "Medium"
   },
   {
     title: "Jiwa Putra",
     source: "Jiwa Putra and Berilmu Berbakti sources",
-    use: "Aligns success pathways with care, responsibility, contribution, and community impact."
+    unit: "UPM / Student Affairs / Student Union",
+    use: "Aligns success pathways with care, responsibility, contribution, and community impact.",
+    type: "Values and impact pathway",
+    priority: "High"
   }
 ];
 
@@ -76,6 +112,28 @@ function categoryClass(category) {
   return category.toLowerCase().replaceAll(" ", "-");
 }
 
+function categoryForScore(score) {
+  if (score >= 80) return "Thriving";
+  if (score >= 65) return "Stable";
+  if (score >= 45) return "Needs Support";
+  return "Immediate Attention";
+}
+
+function advisorLevel(student) {
+  if (student.advisor_meetings >= 3) return "Strong advisor engagement";
+  if (student.advisor_meetings >= 2) return "Active advisor engagement";
+  if (student.advisor_meetings === 1) return "Light advisor engagement";
+  return "Advisor outreach recommended";
+}
+
+function mainSupportNeed(student) {
+  if (student.stress_level_1_5 >= 4) return "Wellbeing and confidence support";
+  if (student.test1 < 70 || student.test2 < 70) return "Assessment preparation";
+  if (student.knows_support_services_1_5 <= 2) return "Support services orientation";
+  if (student.advisor_meetings < 2) return "Advisor check-in";
+  return "Leadership and development stretch";
+}
+
 function supportNeedBuckets(students) {
   const buckets = [
     ["Academic guidance", (s) => /advisor|study|course|academic|assessment|coursework/i.test(s.recommended_action)],
@@ -86,16 +144,26 @@ function supportNeedBuckets(students) {
   return buckets.map(([label, matcher]) => [label, students.filter(matcher).length]);
 }
 
+function renderSimulation(targetId, values) {
+  const total = Object.values(values).reduce((sum, item) => sum + item, 0);
+  byId(targetId).innerHTML = Object.entries(values)
+    .map(([label, value]) => {
+      const width = pct(value, total);
+      return `<div class="bar-row"><span>${label}</span><div class="bar-track"><i class="bar-fill" style="width:${width}%; background:${categoryColors[label]}"></i></div><strong>${value}</strong></div>`;
+    })
+    .join("");
+}
+
 function renderOverview() {
   const students = state.students;
   const counts = countBy(students, "category");
   const mentorship = pct(students.filter((s) => s.advisor_meetings >= 2).length, students.length);
   const supportUse = pct(students.filter((s) => s.knows_support_services_1_5 >= 3).length, students.length);
   const metrics = [
-    ["Total students analyzed", students.length, "synthetic records"],
+    ["Total students", students.length, "anonymized profiles"],
     ["Thriving", counts["Thriving"] || 0, "high momentum"],
     ["Stable", counts["Stable"] || 0, "steady pathway"],
-    ["Needs Support", counts["Needs Support"] || 0, "growth opportunity"],
+    ["Needs Support", counts["Needs Support"] || 0, "support opportunity"],
     ["Immediate Attention", counts["Immediate Attention"] || 0, "same-week guidance"],
     ["Average Success Score", average(students, "student_success_score"), "cohort view"],
     ["Mentorship Engagement", `${mentorship}%`, "2+ advisor meetings"],
@@ -115,6 +183,9 @@ function renderOverview() {
     })
     .join("");
 
+  renderSimulation("beforeSimulation", simulationBefore);
+  renderSimulation("afterSimulation", simulationAfter);
+
   const maxNeed = Math.max(...supportNeedBuckets(students).map(([, value]) => value));
   byId("supportNeeds").innerHTML = supportNeedBuckets(students)
     .map(([label, value]) => `<div class="need-row"><span>${label}</span><strong>${value}/${maxNeed}</strong></div>`)
@@ -124,15 +195,31 @@ function renderOverview() {
     .slice(0, 5)
     .map((student) => `<button class="feed-row table-action" type="button" data-select="${student.student_id}" data-go="insight"><span><strong>${student.student_id}</strong> ${student.recommended_action}</span><span>${student.student_success_score}</span></button>`)
     .join("");
+
+  byId("heroAverageScore").textContent = average(students, "student_success_score");
+}
+
+function renderFilters() {
+  const filters = ["All", "Thriving", "Stable", "Needs Support", "Immediate Attention"];
+  const counts = countBy(state.students, "category");
+  byId("categoryFilters").innerHTML = filters
+    .map((filter) => {
+      const count = filter === "All" ? state.students.length : counts[filter] || 0;
+      const active = state.categoryFilter === filter ? "active" : "";
+      return `<button class="filter-chip ${active}" type="button" data-filter="${filter}">${filter}<span>${count}</span></button>`;
+    })
+    .join("");
 }
 
 function renderStudents(filter = "") {
   const query = filter.trim().toLowerCase();
   const rows = state.students.filter((student) => {
-    return [student.student_id, student.faculty, student.category, student.recommended_action]
+    const matchesCategory = state.categoryFilter === "All" || student.category === state.categoryFilter;
+    const matchesQuery = [student.student_id, student.faculty, student.category, student.recommended_action]
       .join(" ")
       .toLowerCase()
       .includes(query);
+    return matchesCategory && matchesQuery;
   });
 
   byId("studentRows").innerHTML = rows
@@ -148,11 +235,16 @@ function renderStudents(filter = "") {
       </tr>
     `)
     .join("");
+
+  const student = selectedStudent();
+  byId("selectedScoreCompact").textContent = student.student_success_score;
+  byId("selectedCategoryCompact").textContent = student.category;
 }
 
 function renderDetail() {
   const student = selectedStudent();
   byId("selectedStudentPill").textContent = student.student_id;
+  byId("heroStudent").textContent = student.student_id;
   byId("detailId").textContent = student.student_id;
   byId("detailFaculty").textContent = student.faculty;
   byId("detailCategory").textContent = student.category;
@@ -162,7 +254,7 @@ function renderDetail() {
   byId("detailAction").textContent = student.recommended_action;
 
   const diff = (student.gpa_current - student.gpa_previous).toFixed(2);
-  byId("gpaTrendLabel").textContent = diff >= 0 ? `Improving +${diff}` : `Needs attention ${diff}`;
+  byId("gpaTrendLabel").textContent = diff >= 0 ? `Recovery signal +${diff}` : `Growth opportunity ${diff}`;
   const target = Math.min(4, Math.max(student.gpa_current + 0.22, 3.15));
   const bars = [
     ["Previous", student.gpa_previous],
@@ -170,7 +262,17 @@ function renderDetail() {
     ["Target", Number(target.toFixed(2))]
   ];
   byId("gpaTrend").innerHTML = bars
-    .map(([label, value]) => `<div class="trend-bar" style="height:${Math.max(38, value / 4 * 100)}%">${label}<br>${value}</div>`)
+    .map(([label, value]) => `<div class="trend-bar" style="height:${Math.max(38, value / 4 * 100)}%"><span>${label}</span><strong>${value}</strong></div>`)
+    .join("");
+
+  const snapshot = [
+    ["Current pathway", student.category],
+    ["Main support need", mainSupportNeed(student)],
+    ["Recommended first action", student.advisor_meetings < 2 ? "Advisor check-in" : "Mentor reflection"],
+    ["Advisor engagement level", advisorLevel(student)]
+  ];
+  byId("studentSnapshot").innerHTML = snapshot
+    .map(([label, value]) => `<div><span>${label}</span><strong>${value}</strong></div>`)
     .join("");
 
   const indicators = [
@@ -190,6 +292,17 @@ function renderDetail() {
   byId("detailIndicators").innerHTML = indicators
     .map(([label, value]) => `<div class="indicator"><span>${label}</span><strong>${value}</strong></div>`)
     .join("");
+}
+
+function factorContributions(student) {
+  return [
+    ["Attendance pattern", student.attendance_percent < 80 ? -18 : student.attendance_percent < 88 ? -8 : 8],
+    ["Stress indicator", student.stress_level_1_5 >= 4 ? -15 : student.stress_level_1_5 === 3 ? -6 : 6],
+    ["Confidence level", student.confidence_level_1_5 <= 2 ? -10 : student.confidence_level_1_5 === 3 ? -4 : 8],
+    ["Advisor engagement", student.advisor_meetings <= 1 ? -8 : student.advisor_meetings === 2 ? 2 : 8],
+    ["Assessment consistency", student.test1 < 70 || student.test2 < 70 ? -7 : 7],
+    ["GPA recovery signal", student.gpa_current >= student.gpa_previous ? 10 : -6]
+  ];
 }
 
 function supportFactors(student) {
@@ -225,15 +338,35 @@ function growthOpportunities(student) {
 
 function sourceFor(student) {
   if (student.stress_level_1_5 >= 4) {
-    return ["UPM Counselling Division Services", 94];
+    return {
+      source: "UPM Counselling Division Services",
+      category: "Counselling / Wellbeing",
+      confidence: 94,
+      reason: "Used because the student stress indicator is elevated and wellbeing support information should be offered respectfully."
+    };
   }
   if (/career|industry|portfolio|employability|work-based/i.test(student.recommended_action)) {
-    return ["PUTRAFLEX and CADe-Lead employability sources", 91];
+    return {
+      source: "PUTRAFLEX and CADe-Lead employability sources",
+      category: "Career / Employability",
+      confidence: 91,
+      reason: "Used because the pathway includes future-ready development, employability, or portfolio preparation."
+    };
   }
   if (/SULAM|community|volunteer|leadership|ambassador/i.test(student.recommended_action)) {
-    return ["SULAM Playbook and Jiwa Putra student development sources", 93];
+    return {
+      source: "SULAM Playbook and Jiwa Putra student development sources",
+      category: "Leadership / Student Development",
+      confidence: 93,
+      reason: "Used because the recommendation connects student development with leadership, service, and Jiwa Putra impact."
+    };
   }
-  return ["UPM Academic Advising System Guideline", 92];
+  return {
+    source: "UPM Academic Advising System Guideline",
+    category: "Academic Advising / Mentor-Mentee",
+    confidence: 92,
+    reason: "Used because advisor engagement and academic planning support are central to the recommendation."
+  };
 }
 
 function planFor(student) {
@@ -245,26 +378,50 @@ function planFor(student) {
   ];
 }
 
+function mentorMatch(student) {
+  let score = 88;
+  if (student.advisor_meetings < 2) score += 3;
+  if (student.confidence_level_1_5 <= 2) score += 2;
+  if (student.stress_level_1_5 >= 4) score += 1;
+  return Math.min(score, 96);
+}
+
 function renderInsight() {
   const student = selectedStudent();
-  const [source, confidence] = sourceFor(student);
+  const source = sourceFor(student);
   const afterScore = Math.max(74, Math.min(96, student.student_success_score + 26));
-  const afterCategory = afterScore >= 80 ? "Thriving" : afterScore >= 65 ? "Stable" : "Needs Support";
+  const afterCategory = categoryForScore(afterScore);
+  const matchScore = mentorMatch(student);
 
   byId("insightStudent").textContent = student.student_id;
   byId("insightCategory").textContent = student.category;
-  byId("sourceUsed").textContent = source;
-  byId("confidenceBar").style.width = `${confidence}%`;
-  byId("confidenceScore").textContent = `Source confidence: ${confidence}%`;
+  byId("sourceUsed").textContent = source.source;
+  byId("confidenceBar").style.width = `${source.confidence}%`;
+  byId("confidenceScore").textContent = `Source confidence: ${source.confidence}%`;
+  byId("sourceCategory").textContent = source.category;
+  byId("sourceReason").textContent = source.reason;
+  byId("mentorMatchScore").textContent = `${matchScore}%`;
+  byId("mentorMatchReason").textContent = `Same faculty context, ${mainSupportNeed(student).toLowerCase()}, and advisor-guided growth opportunity.`;
+  document.querySelector(".match-score i").style.width = `${matchScore}%`;
+
   byId("supportFactors").innerHTML = supportFactors(student).map((item) => `<li>${item}</li>`).join("");
   byId("strengths").innerHTML = strengths(student).map((item) => `<li>${item}</li>`).join("");
   byId("growthOpportunities").innerHTML = growthOpportunities(student).map((item) => `<li>${item}</li>`).join("");
+  byId("factorBreakdown").innerHTML = factorContributions(student)
+    .map(([label, value]) => {
+      const positive = value >= 0;
+      const width = Math.min(100, Math.abs(value) * 5);
+      return `<div class="factor-row ${positive ? "positive" : "support"}"><span>${label}</span><div><i style="width:${width}%"></i></div><strong>${positive ? "+" : ""}${value}</strong></div>`;
+    })
+    .join("");
+
+  byId("aiSummary").textContent = `${mainSupportNeed(student)} with advisor-guided support, student strengths, and a 30-day success pathway.`;
 
   const recs = [
-    ["Mentor/advisor action", student.advisor_meetings < 2 ? "Schedule advisor check-in and pair with a faculty peer mentor." : "Continue advisor reflection and add peer mentoring for momentum."],
-    ["Academic support", student.test1 < 70 || student.test2 < 70 ? "Weekly study circle and assessment milestone tracking." : "Maintain study rhythm and set a higher learning goal."],
-    ["Wellbeing support", student.stress_level_1_5 >= 4 ? "Share UPM Counselling Division information and voluntary wellbeing pathway." : "Offer wellbeing reminders and balanced workload planning."],
-    ["Development pathway", /leadership|SULAM|community|volunteer/i.test(student.recommended_action) ? "Leadership, SULAM, or community engagement opportunity." : "Career, innovation, or Jiwa Putra volunteer pathway."]
+    ["Mentor / Advisor Action", student.advisor_meetings < 2 ? "Schedule advisor check-in and pair with a faculty peer mentor." : "Continue advisor reflection and add peer mentoring for momentum."],
+    ["Academic Support", student.test1 < 70 || student.test2 < 70 ? "Weekly study circle and assessment milestone tracking." : "Maintain study rhythm and set a higher learning goal."],
+    ["Wellbeing Support", student.stress_level_1_5 >= 4 ? "Share UPM Counselling Division information and voluntary wellbeing pathway." : "Offer wellbeing reminders and balanced workload planning."],
+    ["Leadership / Development Pathway", /leadership|SULAM|community|volunteer/i.test(student.recommended_action) ? "Leadership, SULAM, or community engagement opportunity." : "Career, innovation, or Jiwa Putra volunteer pathway."]
   ];
   byId("aiRecommendations").innerHTML = recs
     .map(([label, text]) => `<div class="recommendation-card"><span>${label}</span><strong>${text}</strong></div>`)
@@ -282,21 +439,28 @@ function renderInsight() {
 
 function renderNotebook() {
   byId("sourceCards").innerHTML = sourceCards
-    .map((card) => `<article class="source-card-static"><h3>${card.title}</h3><p>${card.use}</p><small>${card.source}</small></article>`)
+    .map((card) => `
+      <article class="source-card-static">
+        <div class="panel-head"><h3>${card.title}</h3><span>${card.priority}</span></div>
+        <p><strong>Source:</strong> ${card.source}</p>
+        <p><strong>UPM unit:</strong> ${card.unit}</p>
+        <p>${card.use}</p>
+        <small>Recommendation type: ${card.type}</small>
+      </article>
+    `)
     .join("");
 }
 
 function renderImpact() {
-  const needs = state.students.filter((s) => s.category === "Needs Support" || s.category === "Immediate Attention").length;
-  const mentorSessions = state.students.reduce((sum, s) => sum + Math.max(1, 3 - s.advisor_meetings), 0);
   const metrics = [
-    ["Students guided earlier", needs, "students receive proactive pathways"],
-    ["Mentor sessions recommended", mentorSessions, "advisor and peer mentor actions"],
-    ["Support pathways generated", state.students.length, "one per anonymized student"],
-    ["Moved to Stable simulation", Math.min(needs, 7), "after 30-day success plans"]
+    ["20", "anonymized student profiles analyzed"],
+    ["20", "personalized support pathways generated"],
+    ["29", "mentor/advisor actions recommended"],
+    ["7", "students moved to stable pathway in simulation"],
+    ["100%", "recommendations grounded using NotebookLM sources"]
   ];
   byId("impactMetrics").innerHTML = metrics
-    .map(([label, value, note]) => `<article class="impact-metric"><span>${label}</span><strong>${value}</strong><small>${note}</small></article>`)
+    .map(([value, label]) => `<article class="impact-metric"><strong>${value}</strong><span>${label}</span></article>`)
     .join("");
 }
 
@@ -312,6 +476,7 @@ function renderMobile() {
 
 function renderAll() {
   renderOverview();
+  renderFilters();
   renderStudents(byId("studentSearch")?.value || "");
   renderDetail();
   renderInsight();
@@ -329,7 +494,7 @@ function setScreen(screen) {
     item.classList.toggle("active", item.dataset.screen === screen);
   });
   const active = byId(`screen-${screen}`);
-  byId("screenTitle").textContent = active?.dataset.title || "Overview Dashboard";
+  byId("screenTitle").textContent = active?.dataset.title || "PutraInsight AI 2.0";
   location.hash = screen;
 }
 
@@ -341,12 +506,22 @@ function selectStudent(studentId, nextScreen) {
 
 function bindEvents() {
   document.addEventListener("click", (event) => {
-    const goTarget = event.target.closest("[data-go]");
+    const filterTarget = event.target.closest("[data-filter]");
     const selectTarget = event.target.closest("[data-select]");
+    const goTarget = event.target.closest("[data-go]");
+
+    if (filterTarget) {
+      state.categoryFilter = filterTarget.dataset.filter;
+      renderFilters();
+      renderStudents(byId("studentSearch").value);
+      return;
+    }
+
     if (selectTarget) {
       selectStudent(selectTarget.dataset.select, selectTarget.dataset.go || "detail");
       return;
     }
+
     if (goTarget) {
       setScreen(goTarget.dataset.go);
     }
@@ -361,7 +536,7 @@ function bindEvents() {
   });
 
   window.addEventListener("hashchange", () => {
-    const screen = location.hash.replace("#", "") || "overview";
+    const screen = location.hash.replace("#", "") || "landing";
     if (byId(`screen-${screen}`)) setScreen(screen);
   });
 }
@@ -373,8 +548,8 @@ fetch("data.json")
     state.selectedId = students[0].student_id;
     bindEvents();
     renderAll();
-    const initialScreen = location.hash.replace("#", "") || "overview";
-    setScreen(byId(`screen-${initialScreen}`) ? initialScreen : "overview");
+    const initialScreen = location.hash.replace("#", "") || "landing";
+    setScreen(byId(`screen-${initialScreen}`) ? initialScreen : "landing");
   })
   .catch((error) => {
     document.body.innerHTML = `<main class="main-area"><h1>Unable to load demo data</h1><p>${error.message}</p></main>`;

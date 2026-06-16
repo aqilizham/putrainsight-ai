@@ -1,35 +1,38 @@
-# PutraInsight AI 2.0 Static Demo
+# PutraInsight AI 2.0 V3 Static Demo
 
-This folder is GitHub Pages-ready.
+This folder contains the GitHub Pages-ready static demo for the competition prototype.
+
+Live demo: https://aqilizham.github.io/putrainsight-ai/
 
 ## Files
 
-- `index.html` - single-page static demo with six competition pages.
-- `styles.css` - UPM-inspired visual system using maroon, white, gold, and dark green.
-- `script.js` - local dashboard rendering and chart logic.
-- `data.json` - 20 anonymized student records.
-- `assets/concept-putrainsight.png` - generated visual concept used as the design reference.
+- `index.html` - V3 app-style prototype with landing, dashboard, student detail, AI insight, NotebookLM hub, impact dashboard, mobile preview, and showcase board.
+- `styles.css` - premium UPM-inspired visual system using maroon, white, gold, and subtle green.
+- `script.js` - local state, student selection, filters, AI factor explanations, source grounding, and impact simulation.
+- `data.json` - 20 synthetic/anonymized student records.
+- `assets/concept-putrainsight.png` - generated concept board used as visual direction.
 
 ## Demo Walkthrough
 
-1. Open `index.html`.
-2. Start at the landing page: PutraInsight AI 2.0 and the proactive student success message.
-3. Click `View Student Success Dashboard`.
-4. Review the dashboard metrics, distribution, support utilization, mentorship engagement, and leadership participation.
-5. Open the Student Success Profile for Student A001.
-6. Review the AI Recommendation Engine and 30-Day Success Plan.
-7. Open the NotebookLM Knowledge Hub to explain source grounding.
-8. Open the Jiwa Putra Impact Dashboard to connect the project to student values and community impact.
-9. Show the Mobile App Mockup as the student-facing extension.
+1. Start at the Launch screen.
+2. Click `Launch Demo Dashboard`.
+3. Review the Overview command center and cohort improvement simulation.
+4. Open Students, filter the cohort, and select any student.
+5. Inspect Student Detail and the anonymized indicators.
+6. Open AI Insight to explain factor contributions, mentor matching, and the 30-day success plan.
+7. Open NotebookLM Hub to show how official UPM sources ground recommendations.
+8. Open Jiwa Putra Impact to connect the system to care, responsibility, empowerment, mentorship, wellbeing, leadership, and community impact.
+9. Open Mobile Preview and Showcase Board for screenshot-ready visuals.
 
-## GitHub Pages Deployment
+## Data Privacy
 
-Use `demo/` as the static site root.
+The demo uses synthetic/anonymized student IDs only, such as `Student A001`. It does not include names, emails, phone numbers, matric numbers, respondent data, API keys, tokens, credentials, or environment secret files.
 
-Recommended options:
+## Deployment
 
-- Copy the contents of `demo/` to the repository root of a GitHub Pages branch; or
-- Use GitHub Pages with a `/docs` folder by renaming `demo` to `docs`; or
-- Keep `demo/` and configure the Pages source if your repository setup supports that path.
+GitHub Pages should publish from:
 
-No backend, build step, package manager, or external dependency is required.
+- Branch: `main`
+- Folder: `/(root)`
+
+The root `index.html` redirects to `demo/`. No backend, build step, package manager, or external API is required.

@@ -2,19 +2,24 @@
 
 Student Success Navigator for Solusi AI Jiwa Putra 2026, Universiti Putra Malaysia.
 
-PutraInsight AI 2.0 is positioned as a Student Success and Support Recommendation Platform. It is not a risk prediction platform. The system helps students thrive through personalized guidance, mentorship, wellbeing resources, welfare support, leadership opportunities, development programmes, and a 30-day success pathway.
+Live demo: https://aqilizham.github.io/putrainsight-ai/
 
-## Executive Summary
+PutraInsight AI 2.0 is a Student Success and Support Recommendation Platform. It helps students thrive through personalized guidance, mentorship, wellbeing resources, welfare support, leadership opportunities, development programmes, and a 30-day success pathway.
 
-UPM can move from reactive student support to proactive student success by combining anonymized student indicators, a positive Student Success Score, official UPM knowledge sources, and AI-generated recommendations. NotebookLM acts as the institutional knowledge hub, while Gemini acts as the reasoning and recommendation engine.
+## V3 Executive Summary
 
-The demo package includes:
+The V3 prototype upgrades the demo from a functional dashboard into a competition-ready product showcase. It combines:
 
-- Official UPM NotebookLM source catalog.
-- Competition-ready web dashboard mockup.
-- Competition-ready mobile app mockup.
-- GitHub Pages-ready static demo.
-- Documentation for pitching, poster preparation, and deployment.
+- premium UPM-inspired branding;
+- a multi-student command center;
+- dynamic student detail pages;
+- a visible AI Insight Engine;
+- NotebookLM source grounding;
+- Jiwa Putra impact storytelling;
+- a mobile companion preview;
+- a screenshot-ready Showcase Board.
+
+The prototype uses static HTML, CSS, JavaScript, and synthetic/anonymized data only.
 
 ## Project Concept
 
@@ -28,7 +33,7 @@ PutraInsight AI 2.0 analyzes anonymized student indicators and produces:
 - Development Recommendation
 - 30-Day Success Plan
 
-The language is intentionally positive and empowering. The platform avoids deficit labels and frames every insight as a pathway to support, growth, and belonging.
+The language is intentionally positive and empowering. Every insight is framed as a pathway to support, growth, and belonging.
 
 ## NotebookLM Role
 
@@ -36,17 +41,31 @@ NotebookLM grounds the recommendation engine using official UPM sources. This en
 
 ## Gemini Role
 
-Gemini reasons over anonymized student indicators and NotebookLM-grounded source context. It generates student-friendly explanations, ranked support recommendations, and a personalized success plan.
+Gemini provides the reasoning layer over anonymized student indicators and NotebookLM-grounded source context. It generates student-friendly explanations, factor breakdowns, ranked support recommendations, and personalized success plans.
 
 ## Student Success Score
 
-The Student Success Score is a positive composite indicator for guidance and support planning. It can consider academic trend, attendance, assessment performance, advisor engagement, confidence, stress, and awareness of support services. It should never be framed as failure prediction.
+The Student Success Score is a positive composite indicator for guidance and support planning. It can consider academic trend, attendance, assessment performance, advisor engagement, confidence, stress, and awareness of support services.
 
-## Top 10 NotebookLM Sources
+## Demo Screens
 
-See [notebooklm_sources/source_catalog.md](notebooklm_sources/source_catalog.md) for ranked sources. The most important source areas are academic rules, academic advising, counselling, welfare services, PUTRAFLEX, SULAM, and Jiwa Putra.
+1. Launch landing screen
+2. Overview command center
+3. Students table with search and category filters
+4. Student Detail
+5. AI Insight Engine
+6. NotebookLM Hub
+7. Jiwa Putra Impact
+8. Mobile Preview
+9. Showcase Board
 
-## Full Source Catalog
+## Data Privacy
+
+The demo uses `demo/data.json`, which contains 20 synthetic/anonymized student records from `Student A001` to `Student A020`.
+
+The prototype does not include names, emails, phone numbers, matric numbers, respondent records, API keys, tokens, credentials, or environment secret files.
+
+## NotebookLM Source Catalog
 
 The full catalog is available at:
 
@@ -59,53 +78,43 @@ The full catalog is available at:
 
 ```text
 .
-├── README.md
-├── demo
-│   ├── README.md
-│   ├── assets
-│   │   └── concept-putrainsight.png
-│   ├── data.json
-│   ├── index.html
-│   ├── script.js
-│   └── styles.css
-└── notebooklm_sources
-    ├── README.md
-    ├── search_log.md
-    ├── source_catalog.csv
-    └── source_catalog.md
+|-- README.md
+|-- index.html
+|-- demo
+|   |-- README.md
+|   |-- assets
+|   |   `-- concept-putrainsight.png
+|   |-- data.json
+|   |-- index.html
+|   |-- script.js
+|   `-- styles.css
+`-- notebooklm_sources
+    |-- README.md
+    |-- search_log.md
+    |-- source_catalog.csv
+    `-- source_catalog.md
 ```
 
 ## Demo Instructions
 
-Open [demo/index.html](demo/index.html) in a browser. The demo is static and uses relative paths only.
+Open the live demo at:
 
-Pages included:
+https://aqilizham.github.io/putrainsight-ai/
 
-1. Landing Page
-2. Student Success Dashboard
-3. Student Success Profile
-4. AI Recommendation Engine
-5. NotebookLM Knowledge Hub
-6. Jiwa Putra Impact Dashboard
-7. Mobile App Mockup section
+For local testing, serve the project root with any static HTTP server and open `/demo/`.
 
-## GitHub Pages Instructions
+## GitHub Pages
 
-Use the files inside `demo/` as the static site root. No backend is required.
+GitHub Pages should use:
 
-For the simplest deployment, copy `demo/index.html`, `demo/styles.css`, `demo/script.js`, `demo/data.json`, and `demo/README.md` into the GitHub Pages publishing folder selected in repository settings.
+- Branch: `main`
+- Folder: `/(root)`
 
-## Missing Information
+The root `index.html` redirects to `demo/`.
 
-- No public official source URL was found for `Solusi AI Jiwa Putra 2026`.
-- No public official source URL was found for `Bulan Sinergi Putra 2026`.
-- Add the official competition brief, rubric, deadlines, and poster requirements when available.
-- Add official UPM branding assets only if the competition permits use.
+## Recommendations To Strengthen The Project Further
 
-## Recommendations To Strengthen The Project
-
-- Add the official competition PDF to NotebookLM as the highest-priority source.
-- Include a short privacy slide explaining anonymization, consent, access control, and human-in-the-loop support decisions.
-- Add a poster visual showing `Source -> NotebookLM -> Gemini -> Recommendation`.
-- Prepare a live pitch script that emphasizes student empowerment and Jiwa Putra values.
-- Add faculty-specific recommendation examples once official faculty advising resources are selected.
+- Add the official competition PDF to NotebookLM as the highest-priority source once available.
+- Prepare a 2-minute narration script that follows the V3 demo flow.
+- Use the Showcase Board screen as a screenshot source for the poster and pitch video.
+- Add faculty-specific source grounding if official faculty advising resources are selected.

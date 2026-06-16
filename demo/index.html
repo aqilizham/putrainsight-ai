@@ -9,7 +9,7 @@
   <body>
     <div class="app-shell">
       <aside class="sidebar" aria-label="Primary navigation">
-        <a class="brand" href="#overview" aria-label="PutraInsight AI 2.0 overview">
+        <a class="brand" href="#landing" aria-label="PutraInsight AI 2.0 home">
           <span class="brand-mark">PI</span>
           <span>
             <strong>PutraInsight AI 2.0</strong>
@@ -17,25 +17,27 @@
           </span>
         </a>
         <nav class="side-nav" id="sideNav">
-          <button class="nav-item active" data-screen="overview" type="button">Overview</button>
+          <button class="nav-item active" data-screen="landing" type="button">Launch</button>
+          <button class="nav-item" data-screen="overview" type="button">Overview</button>
           <button class="nav-item" data-screen="students" type="button">Students</button>
           <button class="nav-item" data-screen="detail" type="button">Student Detail</button>
           <button class="nav-item" data-screen="insight" type="button">AI Insight</button>
           <button class="nav-item" data-screen="notebook" type="button">NotebookLM Hub</button>
           <button class="nav-item" data-screen="impact" type="button">Jiwa Putra Impact</button>
           <button class="nav-item" data-screen="mobile" type="button">Mobile Preview</button>
+          <button class="nav-item" data-screen="showcase" type="button">Showcase Board</button>
         </nav>
         <div class="sidebar-note">
-          <span>Grounded by official UPM sources</span>
-          <strong>2-minute demo flow</strong>
+          <span>Competition prototype</span>
+          <strong>NotebookLM-grounded Gemini reasoning</strong>
         </div>
       </aside>
 
       <main class="main-area">
         <header class="app-header">
           <div>
-            <p class="eyebrow">Competition prototype</p>
-            <h1 id="screenTitle">Overview Dashboard</h1>
+            <p class="eyebrow">UPM student success prototype</p>
+            <h1 id="screenTitle">PutraInsight AI 2.0</h1>
           </div>
           <div class="selected-pill">
             <span>Selected student</span>
@@ -43,20 +45,80 @@
           </div>
         </header>
 
-        <section class="screen active" id="screen-overview" data-title="Overview Dashboard">
-          <div class="intro-panel">
-            <div>
-              <h2>Multi-student success command center</h2>
-              <p>Analyze anonymized student indicators, identify growth opportunities, and generate support pathways grounded in UPM resources.</p>
+        <section class="screen active landing-screen" id="screen-landing" data-title="PutraInsight AI 2.0">
+          <div class="hero-stage">
+            <div class="hero-copy">
+              <p class="hero-label">Universiti Putra Malaysia innovation demo</p>
+              <h2>PutraInsight AI 2.0</h2>
+              <p class="hero-tagline">Helping Students Thrive Before They Struggle</p>
+              <p>AI-powered Student Success Navigator grounded by NotebookLM and powered by Gemini reasoning.</p>
+              <div class="hero-actions">
+                <button class="primary-action" data-go="overview" type="button">Launch Demo Dashboard</button>
+                <button class="secondary-action" data-go="notebook" type="button">View NotebookLM Workflow</button>
+              </div>
+              <small class="data-note">Competition prototype using synthetic/anonymized student data.</small>
             </div>
-            <button class="primary-action" data-go="students" type="button">Review Students</button>
+            <div class="product-preview" aria-label="Product preview">
+              <article class="preview-main">
+                <span>Overview Dashboard</span>
+                <strong id="heroAverageScore">74</strong>
+                <small>Average success score</small>
+                <div class="preview-bars">
+                  <i style="width:70%"></i>
+                  <i style="width:58%"></i>
+                  <i style="width:42%"></i>
+                </div>
+              </article>
+              <article><span>Student Profile</span><strong id="heroStudent">Student A001</strong></article>
+              <article><span>AI Insight Engine</span><strong>Why this recommendation?</strong></article>
+              <article><span>NotebookLM Hub</span><strong>Official UPM sources</strong></article>
+              <article><span>Mobile Preview</span><strong>Success pathway</strong></article>
+            </div>
+          </div>
+          <div class="value-card-grid">
+            <article><span>01</span><strong>Personalized Guidance</strong><p>Student-specific success pathways from anonymized indicators.</p></article>
+            <article><span>02</span><strong>Mentorship & Support</strong><p>Advisor and peer mentor actions remain human-guided.</p></article>
+            <article><span>03</span><strong>Wellbeing & Balance</strong><p>Respectful support information without stigma.</p></article>
+            <article><span>04</span><strong>Leadership & Impact</strong><p>Jiwa Putra development opportunities for growth.</p></article>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-overview" data-title="Overview Dashboard">
+          <div class="intro-panel command-panel">
+            <div>
+              <h2>Student success command center</h2>
+              <p>Review the cohort, select a student, inspect the AI insight, then show the NotebookLM-grounded success pathway.</p>
+            </div>
+            <button class="primary-action" data-go="students" type="button">Review Student Cohort</button>
           </div>
           <div class="metric-grid" id="overviewMetrics"></div>
           <div class="dashboard-grid">
+            <article class="panel simulation-panel wide-panel">
+              <div class="panel-head">
+                <h3>Cohort Improvement Simulation</h3>
+                <span>30-day AI-guided support</span>
+              </div>
+              <div class="simulation-grid">
+                <div>
+                  <h4>Before support</h4>
+                  <div class="bar-list" id="beforeSimulation"></div>
+                </div>
+                <div class="improvement-callout">
+                  <strong>+26</strong>
+                  <span>average improvement for supported students</span>
+                  <small>7 students moved to stable pathway</small>
+                  <small>100% received source-grounded recommendations</small>
+                </div>
+                <div>
+                  <h4>After 30-day plan</h4>
+                  <div class="bar-list" id="afterSimulation"></div>
+                </div>
+              </div>
+            </article>
             <article class="panel">
               <div class="panel-head">
                 <h3>Category Distribution</h3>
-                <span>20 students</span>
+                <span>live demo data</span>
               </div>
               <div class="bar-list" id="categoryDistribution"></div>
             </article>
@@ -66,6 +128,20 @@
                 <span>from recommendations</span>
               </div>
               <div class="need-list" id="supportNeeds"></div>
+            </article>
+            <article class="panel demo-flow-card">
+              <h3>2-minute demo flow</h3>
+              <ol>
+                <li>Review student cohort</li>
+                <li>Select a student</li>
+                <li>Inspect AI insight</li>
+                <li>Review NotebookLM sources</li>
+                <li>Generate success pathway</li>
+              </ol>
+            </article>
+            <article class="panel human-card">
+              <h3>Human-in-the-loop</h3>
+              <p>PutraInsight AI supports advisors. It does not replace academic advisors, counsellors, or university officers.</p>
             </article>
             <article class="panel wide-panel">
               <div class="panel-head">
@@ -80,26 +156,37 @@
         <section class="screen" id="screen-students" data-title="Students">
           <div class="screen-toolbar">
             <div>
-              <h2>Students analyzed</h2>
-              <p>All records are synthetic and anonymized for the competition demo.</p>
+              <h2>Multi-student cohort</h2>
+              <p>The table is powered by `demo/data.json` and supports all 20 anonymized student profiles.</p>
             </div>
             <input id="studentSearch" type="search" placeholder="Search student, faculty, category">
           </div>
-          <div class="student-table-wrap">
-            <table class="student-table">
-              <thead>
-                <tr>
-                  <th>Student ID</th>
-                  <th>Faculty</th>
-                  <th>Year</th>
-                  <th>Score</th>
-                  <th>Category</th>
-                  <th>Recommended Action</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody id="studentRows"></tbody>
-            </table>
+          <div class="student-page-grid">
+            <article class="panel filter-panel">
+              <h3>Category filter</h3>
+              <div class="filter-list" id="categoryFilters"></div>
+              <div class="selected-score-card">
+                <span>Selected score</span>
+                <strong id="selectedScoreCompact">48</strong>
+                <small id="selectedCategoryCompact">Needs Support</small>
+              </div>
+            </article>
+            <div class="student-table-wrap">
+              <table class="student-table">
+                <thead>
+                  <tr>
+                    <th>Student ID</th>
+                    <th>Faculty</th>
+                    <th>Year</th>
+                    <th>Score</th>
+                    <th>Category</th>
+                    <th>Recommended Action</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="studentRows"></tbody>
+              </table>
+            </div>
           </div>
         </section>
 
@@ -114,7 +201,7 @@
                 <span class="category-badge" id="detailCategory">Needs Support</span>
               </div>
               <div class="score-block">
-                <div class="score-ring" id="detailScoreRing" style="--score:48">
+                <div class="score-ring large" id="detailScoreRing" style="--score:48">
                   <span id="detailScore">48</span>
                   <small>Student Success Score</small>
                 </div>
@@ -124,12 +211,20 @@
                 </div>
               </div>
             </article>
+            <article class="panel snapshot-panel">
+              <h3>Student Snapshot</h3>
+              <div id="studentSnapshot" class="snapshot-list"></div>
+            </article>
             <article class="panel">
               <div class="panel-head">
                 <h3>GPA Trend</h3>
                 <span id="gpaTrendLabel">Improving</span>
               </div>
               <div class="trend-bars" id="gpaTrend"></div>
+            </article>
+            <article class="panel privacy-card">
+              <h3>Privacy note</h3>
+              <p>Only anonymized indicators are shown. No names, matric numbers, emails, or private identifiers are used in this prototype.</p>
             </article>
             <article class="panel wide-panel">
               <div class="panel-head">
@@ -148,7 +243,7 @@
                 <h3 id="insightStudent">Student A001</h3>
                 <span id="insightCategory">Needs Support</span>
               </div>
-              <p>Recommendations are grounded using official UPM resources through NotebookLM.</p>
+              <p>Gemini generates the reasoning layer, while NotebookLM grounds the recommendation using official UPM resources.</p>
               <div class="source-card">
                 <span>NotebookLM source used</span>
                 <strong id="sourceUsed">UPM Academic Advising System Guideline</strong>
@@ -157,6 +252,19 @@
                 </div>
                 <small id="confidenceScore">Source confidence: 92%</small>
               </div>
+            </article>
+            <article class="panel mentor-match-card">
+              <h3>Recommended Advisor / Mentor Type</h3>
+              <strong>Academic advisor + trained peer mentor</strong>
+              <div class="match-score"><span id="mentorMatchScore">91%</span><i></i></div>
+              <p id="mentorMatchReason">Same faculty context, academic planning support, confidence-building need.</p>
+            </article>
+            <article class="panel wide-panel">
+              <div class="panel-head">
+                <h3>Why this recommendation?</h3>
+                <span>factor contribution breakdown</span>
+              </div>
+              <div class="factor-grid" id="factorBreakdown"></div>
             </article>
             <article class="panel">
               <h3>Key Support Factors</h3>
@@ -170,8 +278,20 @@
               <h3>Growth Opportunities</h3>
               <ul class="clean-list" id="growthOpportunities"></ul>
             </article>
+            <article class="panel ai-summary-card">
+              <h3>AI Recommendation Summary</h3>
+              <p id="aiSummary">Advisor-guided support pathway with academic planning and wellbeing information.</p>
+              <strong>Human review required before action.</strong>
+            </article>
             <article class="panel wide-panel">
               <div class="recommendation-grid" id="aiRecommendations"></div>
+            </article>
+            <article class="panel source-reason-card wide-panel">
+              <div class="panel-head">
+                <h3>Source grounding explanation</h3>
+                <span id="sourceCategory">Academic Advising</span>
+              </div>
+              <p id="sourceReason">Used because advisor engagement and academic planning support are central to the recommendation.</p>
             </article>
             <article class="panel wide-panel journey-panel">
               <div class="panel-head">
@@ -196,18 +316,30 @@
         </section>
 
         <section class="screen" id="screen-notebook" data-title="NotebookLM Hub">
-          <div class="intro-panel">
+          <div class="intro-panel notebook-hero">
             <div>
-              <h2>How grounding works</h2>
-              <p>NotebookLM keeps the recommendation engine connected to UPM academic, welfare, counselling, leadership, career, and Jiwa Putra sources.</p>
+              <h2>NotebookLM is the grounding layer</h2>
+              <p>NotebookLM prevents generic AI advice by grounding recommendations in official UPM resources.</p>
             </div>
+            <button class="primary-action" data-go="insight" type="button">Inspect AI Reasoning</button>
           </div>
-          <div class="grounding-flow">
+          <div class="vertical-flow">
             <div>Student Indicators</div>
             <div>Gemini Analysis</div>
-            <div>NotebookLM Official Sources</div>
-            <div>Personalized Recommendation</div>
+            <div>NotebookLM Official UPM Sources</div>
+            <div>Grounded Recommendation</div>
             <div>Student Success Pathway</div>
+            <div>Advisor Review</div>
+          </div>
+          <div class="why-grid">
+            <article class="panel">
+              <h3>Why NotebookLM?</h3>
+              <p>NotebookLM prevents generic AI advice by grounding recommendations in official UPM resources.</p>
+            </article>
+            <article class="panel">
+              <h3>Why not Gemini alone?</h3>
+              <p>Gemini reasons over the student profile, but NotebookLM anchors the answer to UPM-specific policies, services, and support pathways.</p>
+            </article>
           </div>
           <div class="source-category-grid" id="sourceCards"></div>
         </section>
@@ -215,7 +347,7 @@
         <section class="screen" id="screen-impact" data-title="Jiwa Putra Impact">
           <div class="impact-hero">
             <div>
-              <h2>From insight to care, responsibility, and empowerment</h2>
+              <h2>From insight to care, responsibility, and empowerment.</h2>
               <p>PutraInsight connects student success with mentorship, wellbeing, leadership, and community impact.</p>
             </div>
             <div class="impact-mark">Jiwa Putra</div>
@@ -227,55 +359,77 @@
             <article class="panel"><h3>Student Empowerment</h3><p>Clear next steps that students can understand and act on.</p></article>
             <article class="panel"><h3>Mentorship</h3><p>Advisor and peer mentor actions connected to each pathway.</p></article>
             <article class="panel"><h3>Wellbeing</h3><p>Support options presented positively and respectfully.</p></article>
+            <article class="panel"><h3>Leadership</h3><p>Student development and leadership participation as growth opportunities.</p></article>
             <article class="panel"><h3>Community Impact</h3><p>Leadership and service pathways aligned with Berilmu Berbakti.</p></article>
           </div>
+          <article class="panel closing-impact">
+            <strong>PutraInsight AI 2.0 embodies Jiwa Putra by helping students receive the right support before challenges become critical.</strong>
+          </article>
         </section>
 
         <section class="screen" id="screen-mobile" data-title="Mobile Preview">
           <div class="screen-toolbar">
             <div>
               <h2>Student mobile companion</h2>
-              <p>A clean mobile view for success score, pathway, mentor, and recommended programmes.</p>
+              <p>Phone-like cards for success score, pathway, mentor, recommended programmes, and NotebookLM-grounded support.</p>
             </div>
           </div>
           <div class="phone-grid">
-            <div class="phone">
-              <h3>Home</h3>
-              <p id="mobileHome">Welcome back, Student A001</p>
-              <strong id="mobileToday">Today: advisor check-in</strong>
-            </div>
-            <div class="phone">
-              <h3>Success Score</h3>
-              <div class="score-ring small" id="mobileScoreRing" style="--score:48"><span id="mobileScore">48</span></div>
-              <p id="mobileCategory">Needs Support</p>
-            </div>
-            <div class="phone">
-              <h3>My Success Pathway</h3>
-              <p>Month 1: stabilize study rhythm</p>
-              <p>Month 2: mentor reflection</p>
-              <p>Month 3: leadership opportunity</p>
-            </div>
-            <div class="phone">
-              <h3>Mentor Recommendation</h3>
-              <p>Academic advisor plus trained peer mentor from the same faculty.</p>
-            </div>
-            <div class="phone">
-              <h3>Recommended Programs</h3>
-              <p id="mobilePrograms">Study Circle, Wellbeing Info, Jiwa Putra Volunteer</p>
-            </div>
+            <div class="phone"><div class="phone-top">Home</div><p id="mobileHome">Welcome back, Student A001</p><strong id="mobileToday">Today: advisor check-in</strong><div class="phone-card">Support pathway ready</div></div>
+            <div class="phone"><div class="phone-top">Success Score</div><div class="score-ring small" id="mobileScoreRing" style="--score:48"><span id="mobileScore">48</span></div><p id="mobileCategory">Needs Support</p><div class="mini-progress"><i style="width:62%"></i></div></div>
+            <div class="phone"><div class="phone-top">My Success Pathway</div><div class="phone-card">Month 1: study rhythm</div><div class="phone-card">Month 2: mentor reflection</div><div class="phone-card">Month 3: leadership opportunity</div></div>
+            <div class="phone"><div class="phone-top">Mentor Recommendation</div><p>Academic advisor + trained peer mentor</p><strong>Match Score: 91%</strong><div class="mini-progress"><i style="width:91%"></i></div></div>
+            <div class="phone"><div class="phone-top">Recommended Programs</div><p id="mobilePrograms">Study Circle, Wellbeing Info, Jiwa Putra Volunteer</p><div class="phone-card">Advisor-guided support</div></div>
+            <div class="phone"><div class="phone-top">NotebookLM Support</div><p>Official UPM source grounding is attached to each recommendation.</p><strong>Source confidence: 92%</strong></div>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-showcase" data-title="Showcase Board">
+          <div class="showcase-board">
+            <article class="showcase-hero">
+              <span>PutraInsight AI 2.0</span>
+              <h2>Helping Students Thrive Before They Struggle</h2>
+              <p>AI-powered student success navigator grounded by NotebookLM and powered by Gemini reasoning.</p>
+            </article>
+            <article class="showcase-card dashboard-preview">
+              <h3>Dashboard Preview</h3>
+              <strong>20</strong>
+              <span>student profiles analyzed</span>
+              <div class="preview-bars"><i style="width:78%"></i><i style="width:58%"></i><i style="width:28%"></i></div>
+            </article>
+            <article class="showcase-card">
+              <h3>AI Insight Preview</h3>
+              <p>Factor contributions, mentor match, source confidence, and 30-day success plan.</p>
+            </article>
+            <article class="showcase-card">
+              <h3>NotebookLM Workflow</h3>
+              <p>Student Indicators → Gemini Analysis → Official UPM Sources → Advisor Review</p>
+            </article>
+            <article class="showcase-card">
+              <h3>Jiwa Putra Impact</h3>
+              <strong>100%</strong>
+              <span>recommendations source-grounded</span>
+            </article>
+            <article class="showcase-phone">
+              <div class="phone-top">Mobile Preview</div>
+              <strong>Student Success Score</strong>
+              <span>74 Stable pathway</span>
+            </article>
           </div>
         </section>
       </main>
     </div>
 
     <nav class="mobile-nav" aria-label="Mobile navigation">
-      <button class="nav-item active" data-screen="overview" type="button">Overview</button>
+      <button class="nav-item active" data-screen="landing" type="button">Launch</button>
+      <button class="nav-item" data-screen="overview" type="button">Overview</button>
       <button class="nav-item" data-screen="students" type="button">Students</button>
       <button class="nav-item" data-screen="detail" type="button">Detail</button>
       <button class="nav-item" data-screen="insight" type="button">AI</button>
       <button class="nav-item" data-screen="notebook" type="button">Hub</button>
       <button class="nav-item" data-screen="impact" type="button">Impact</button>
       <button class="nav-item" data-screen="mobile" type="button">Mobile</button>
+      <button class="nav-item" data-screen="showcase" type="button">Board</button>
     </nav>
 
     <script src="script.js"></script>
