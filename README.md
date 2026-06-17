@@ -61,12 +61,12 @@ The Student Success Score is a positive composite indicator for guidance and sup
 
 ## Competition Poster
 
-The A4 digital poster is available in:
+The redesigned A4 landscape digital poster follows the approved product showcase mockup style and is available in:
 
 - [poster/poster.html](poster/poster.html)
 - [poster/README.md](poster/README.md)
 
-It is designed for browser export to PDF or PNG using A4 portrait settings.
+It is designed for browser export to PDF or PNG using A4 landscape settings.
 
 ## Data Privacy
 
