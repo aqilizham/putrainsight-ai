@@ -40,3 +40,7 @@ GitHub Pages should publish from:
 - Folder: `/(root)`
 
 The root `index.html` redirects to `demo/`. No backend, build step, package manager, or external API is required.
+
+## Poster
+
+The A4 competition poster is available at `../poster/poster.html`.

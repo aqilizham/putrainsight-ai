@@ -59,6 +59,15 @@ The Student Success Score is a positive composite indicator for guidance and sup
 8. Mobile Preview
 9. Showcase Board
 
+## Competition Poster
+
+The A4 digital poster is available in:
+
+- [poster/poster.html](poster/poster.html)
+- [poster/README.md](poster/README.md)
+
+It is designed for browser export to PDF or PNG using A4 portrait settings.
+
 ## Data Privacy
 
 The demo uses `demo/data.json`, which contains 20 synthetic/anonymized student records from `Student A001` to `Student A020`.

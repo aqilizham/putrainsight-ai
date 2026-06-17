@@ -134,6 +134,12 @@ function mainSupportNeed(student) {
   return "Leadership and development stretch";
 }
 
+function shortAction(action) {
+  const text = action.replace(/\s+/g, " ").trim();
+  if (text.length <= 72) return text;
+  return `${text.slice(0, 69).trim()}...`;
+}
+
 function supportNeedBuckets(students) {
   const buckets = [
     ["Academic guidance", (s) => /advisor|study|course|academic|assessment|coursework/i.test(s.recommended_action)],
@@ -233,7 +239,7 @@ function renderStudents(filter = "") {
         <td>Year ${student.year}</td>
         <td><strong>${student.student_success_score}</strong></td>
         <td><span class="table-badge ${categoryClass(student.category)}">${student.category}</span></td>
-        <td>${student.recommended_action}</td>
+        <td><span class="action-summary" title="${student.recommended_action}">${shortAction(student.recommended_action)}</span></td>
         <td><button class="table-action" type="button" data-select="${student.student_id}" data-go="detail">View Details</button></td>
       </tr>
     `)
